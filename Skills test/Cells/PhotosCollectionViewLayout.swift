@@ -8,6 +8,7 @@
 import UIKit
 
 // MARK: PhotosCollectionViewLayout
+/// This class sets a custom layout for a CollectionView itended to show a photos grid. It also stores the size of the photos cell and also the activity indicator cell.
 class PhotosCollectionViewLayout: UICollectionViewFlowLayout {
     // MARK: Constants
     private struct Constants {

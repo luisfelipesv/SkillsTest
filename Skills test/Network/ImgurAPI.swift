@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - ImgurAPI
+/// ImgurAPI class in charge of doing the calls to the API and storing all the appi related information.
 final class ImgurAPI {
     // MARK: Constants
     private struct Constants {
@@ -30,6 +31,11 @@ final class ImgurAPI {
     private var latestQuery = ""
     
     // MARK: Public functions
+    /// Loads the photos from the Imgur Search Gallery API.
+    /// - Parameters:
+    ///   - text: Text for the search query
+    ///   - page: Page requested to the API. Starts at 0
+    ///   - completion: completion handler that returns tan array of ImgurPost
     public func loadPhotos(text: String, page: Int, completion: @escaping ([ImgurPost]) -> Void) {
         let searchQuery = URLQueryItem(name: Constants.searchQueryName, value: text)
         let filterTypeQuery = URLQueryItem(name: Constants.filterQueryName, value: Constants.jpgType)

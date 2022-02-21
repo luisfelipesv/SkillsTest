@@ -61,6 +61,8 @@ class PhotosViewController: UIViewController {
         }
     }
     
+    /// Loads Photos based on already set `searchText` and `page`.
+    /// Only intended to be used by `loadMorePhotos()` and `loadPhotos(searchText: String)`
     private func loadPhotos() {
         imgurAPI.loadPhotos(text: searchText, page: page) { [weak self] imgurPosts in
             guard let self = self else { return }
@@ -72,6 +74,8 @@ class PhotosViewController: UIViewController {
         }
     }
     
+    /// Loads new photos. Intended to be used when the user does a new search query.
+    /// - Parameter searchText: text to be search on the Imgur API
     private func loadPhotos(searchText: String) {
         isLoading = true
         images.removeAll()
@@ -83,6 +87,7 @@ class PhotosViewController: UIViewController {
         loadPhotos()
     }
     
+    /// Loads more photos. Intended to be used only when loading more photos after going to the end of the collection view.
     private func loadMorePhotos() {
         if isLoading { return }
         
@@ -92,6 +97,9 @@ class PhotosViewController: UIViewController {
         loadPhotos()
     }
     
+    /// Filters the imgur images from the imgur posts
+    /// - Parameter posts: Array of `ImgurPost`
+    /// - Returns: Array of `ImgurImage` made from `posts`
     private func getImagesFromPosts(posts: [ImgurPost]) -> [ImgurImage] {
         // Remove nil images
         let imagesArray = posts.compactMap { $0.images }
@@ -101,6 +109,8 @@ class PhotosViewController: UIViewController {
         return flattenImages.filter { $0.isJPEG()}
     }
     
+    /// Updates the images array and reloads the collection view
+    /// - Parameter newImages: newImages that are going to be added to the images array
     private func updateImages(newImages: [ImgurImage]) {
         // Append new images to existing array
         images += newImages
@@ -111,6 +121,8 @@ class PhotosViewController: UIViewController {
 
 // MARK: - PhotosSearchDelegate
 extension PhotosViewController: PhotosSearchDelegate {
+    /// Gets called after the user taps the search button on the keyboard.
+    /// - Parameter searchText: text searched by the user
     func photosSearched(searchText: String?) {
         guard let searchText = searchText else {
             title = Constants.title

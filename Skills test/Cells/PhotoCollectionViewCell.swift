@@ -8,6 +8,7 @@
 import UIKit
 
 // MARK: - PhotoCollectionViewCell
+/// Cell that displays a single photo in each cell. The cell can also display a loading activity indicator while the photo loads.
 class PhotoCollectionViewCell: UICollectionViewCell {
     
      // MARK: Reuse Identifier
@@ -60,10 +61,13 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     }
 
     // MARK: Public functions
+    /// Starts animation the activity indicator
     public func startIndicator() {
         indicator.startAnimating()
     }
     
+    /// Sets the image to the imageView and stops animating the activity indicator
+    /// - Parameter image: Image to be set and display and in the cell
     public func setImage(_ image: UIImage) {
         indicator.stopAnimating()
         imageView.image = image

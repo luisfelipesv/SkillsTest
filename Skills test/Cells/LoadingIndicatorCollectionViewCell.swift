@@ -8,6 +8,7 @@
 import UIKit
 
 // MARK: - LoadingIndicatorCollectionViewCell
+/// This class shows a large loading activiity indicator
 class LoadingIndicatorCollectionViewCell: UICollectionViewCell {
     
     // MARK: Reuse Identifier
